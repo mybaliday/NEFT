@@ -117,7 +117,7 @@ body{
   50%{transform:translateY(-10px)}
 }
 
-/* Bubbles dekoratif (opsional) */
+/* Bubbles dekoratif */
 .bubbles{position:absolute; inset:0; pointer-events:none; overflow:hidden}
 .bubbles span{
   position:absolute; bottom:-40px; left:calc(var(--i) * 9%); width:14px; height:14px;
@@ -143,17 +143,6 @@ body{
 .card__img{width:84px; height:84px; object-fit:contain; margin:4px auto 10px; display:block}
 .card h3{margin:6px 0 6px; font-size:1.2rem}
 .card p{color:var(--muted); font-size:.98rem}
-
-/* ========== Gallery ========== */
-.gallery{padding:24px 0 10px}
-.gallery__grid{
-  display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;
-}
-.gallery__grid img{
-  width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:18px; box-shadow:var(--shadow);
-  transition: transform .2s ease;
-}
-.gallery__grid img:hover{transform: translateY(-3px)}
 
 /* ========== Join Box ========== */
 .join{padding:28px 0 40px}
@@ -186,7 +175,6 @@ body{
 }
 @media (max-width: 780px){
   .cards{grid-template-columns:1fr 1fr}
-  .gallery__grid{grid-template-columns:1fr 1fr}
   /* mobile nav */
   .burger{display:flex}
   .nav{
@@ -199,5 +187,4 @@ body{
 }
 @media (max-width: 560px){
   .cards{grid-template-columns:1fr}
-  .gallery__grid{grid-template-columns:1fr}
 }
