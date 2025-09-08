@@ -90,12 +90,35 @@ body{
 }
 .lead{font-size:1.1rem; color:var(--muted); margin:6px 0 18px}
 .cta{display:flex; gap:12px; flex-wrap:wrap}
-.socials{display:flex; gap:14px; margin-top:14px}
-.socials a{
-  width:42px; height:42px; display:inline-grid; place-items:center; border-radius:14px;
-  background:#ffffffcc; box-shadow:var(--shadow); color:#111; text-decoration:none; font-size:1.1rem;
+
+/* socials diperbarui */
+.socials {
+  display: flex;
+  gap: 14px;
+  margin-top: 14px;
+  flex-wrap: wrap;
 }
-.socials a:hover{transform:translateY(-2px)}
+.socials a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: #ffffffcc;
+  box-shadow: var(--shadow);
+  color: #111;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform 0.2s, background 0.3s;
+}
+.socials a i {
+  font-size: 1.2rem;
+}
+.socials a:hover {
+  transform: translateY(-2px);
+  background: #fff;
+}
 
 .hero__media{position:relative}
 .hero__img{
