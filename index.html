@@ -20,7 +20,6 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="#" class="brand">
-        <!-- GANTI_GAMBAR: logo -->
         <img src="sol3D.png" alt="Logo" class="brand__logo" />
         <span class="brand__name">$PANICI</span>
       </a>
@@ -33,16 +32,12 @@
       <nav class="nav">
         <a href="#home">Home</a>
         <a href="#about">About</a>
-        <!-- Gallery dihapus dari menu -->
         <a href="#join" class="btn btn--small">Buy / Join</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero -->
-
-
-  
   <main id="home" class="hero">
     <div class="container hero__grid">
       <div class="hero__text">
@@ -51,30 +46,26 @@
 
         <div class="cta">
           <a href="#" class="btn">Buy Now</a>
-          <a href="#" class="btn">Contract</a>
+          <button id="contract-btn" class="btn" type="button">Contract</button>
           <a href="#" class="btn btn--outline">Chart</a>
         </div>
 
-    <div class="socials">
-  <a href="https://x.com/Panicitoken" target="_blank" aria-label="X/Twitter">
-    <i class="fa-brands fa-x-twitter"></i> Twitter
-  </a>
-  <a href="https://t.me/+-Zvjw5_cQFc4NGZl" target="_blank" aria-label="Telegram">
-    <i class="fa-brands fa-telegram"></i> Telegram
-  </a>
-</div>
+        <div class="socials">
+          <a href="https://x.com/Panicitoken" target="_blank" aria-label="X/Twitter">
+            <i class="fa-brands fa-x-twitter"></i> Twitter
+          </a>
+          <a href="https://t.me/+-Zvjw5_cQFc4NGZl" target="_blank" aria-label="Telegram">
+            <i class="fa-brands fa-telegram"></i> Telegram
+          </a>
+        </div>
+      </div>
 
       <div class="hero__media">
-        <!-- GANTI_GAMBAR: maskot/hero -->
         <img src="solg.gif" alt="Mascot" class="hero__img" />
-        <!-- Hiasan stiker kecil -->
-        <!-- GANTI_GAMBAR: stiker kecil (opsional) -->
-     
         <img src="3D.png" alt="" class="sticker s2" />
       </div>
     </div>
 
-    <!-- Background bubbles dekoratif -->
     <div class="bubbles" aria-hidden="true">
       <span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span>
       <span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span>
@@ -83,7 +74,7 @@
     </div>
   </main>
 
-  <!-- About / Feature Cards -->
+  <!-- About -->
   <section id="about" class="features">
     <div class="container">
       <h2 class="section-title">TOKENOMIC?</h2>
@@ -107,7 +98,7 @@
     </div>
   </section>
 
-  <!-- Join / CTA -->
+  <!-- Join -->
   <section id="join" class="join">
     <div class="container join__box">
       <div class="join__text">
@@ -134,5 +125,58 @@
       </div>
     </div>
   </footer>
+
+  <!-- Modal Contract -->
+  <div id="contract-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="contract-modal-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" role="document">
+      <button class="modal-close" aria-label="Close" data-close>&times;</button>
+      <h2 id="contract-modal-title">Contract</h2>
+      <p id="contract-text">YOUR_CONTRACT_ADDRESS_HERE</p>
+
+      <div class="modal-actions">
+        <button id="copy-contract-btn" type="button">Copy</button>
+        <button type="button" data-close>Close</button>
+      </div>
+
+      <div id="copy-status" class="status" style="display:none"></div>
+    </div>
+  </div>
+
+  <!-- Script Modal -->
+  <script>
+  (function(){
+    const contractText = "YOUR_CONTRACT_ADDRESS_HERE";
+    const openBtn = document.getElementById('contract-btn');
+    const modal = document.getElementById('contract-modal');
+    const modalText = document.getElementById('contract-text');
+    const copyBtn = document.getElementById('copy-contract-btn');
+    const closeBtns = modal.querySelectorAll('[data-close]');
+    const statusEl = document.getElementById('copy-status');
+
+    if (modalText) modalText.textContent = contractText;
+
+    function openModal(){ modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function closeModal(){ modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; clearStatus(); }
+    function showStatus(msg,isErr){ statusEl.style.display='block'; statusEl.textContent=msg; statusEl.className='status'+(isErr?' error':''); setTimeout(clearStatus,2500); }
+    function clearStatus(){ statusEl.style.display='none'; statusEl.textContent=''; statusEl.className='status'; }
+
+    async function copyToClipboard(text){
+      try {
+        if (navigator.clipboard) { await navigator.clipboard.writeText(text); return true; }
+        else { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); return true; }
+      } catch(e){ return false; }
+    }
+
+    openBtn && openBtn.addEventListener('click', openModal);
+    copyBtn && copyBtn.addEventListener('click', async ()=>{ 
+      const ok = await copyToClipboard(contractText);
+      if(ok) showStatus('Copied ✅'); else showStatus('Failed to copy ❌',true);
+    });
+    closeBtns.forEach(btn=>btn.addEventListener('click', closeModal));
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape' && modal.getAttribute('aria-hidden')==='false'){ closeModal(); } });
+    modal.querySelector('.modal-backdrop').addEventListener('click', closeModal);
+  })();
+  </script>
 </body>
 </html>
